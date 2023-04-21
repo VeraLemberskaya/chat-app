@@ -1,0 +1,41 @@
+@import 'styles/colors';
+
+.input {
+  height: 32px;
+  max-width: 273px;
+  width: 100%;
+
+  &__label {
+    font-size: 20px;
+  }
+
+  &__input {
+    border: 1px solid $gray400;
+    border-radius: 2px;
+    outline: none;
+    padding: 0 6px;
+
+    height: 100%;
+    width: 100%;
+
+    font-size: 16px;
+
+    &:hover {
+      border-color: $gray500;
+    }
+
+    &:focus {
+      border-color: $blue300;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      appearance: textfield;
+    }
+  }
+}

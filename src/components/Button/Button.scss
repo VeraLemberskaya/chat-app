@@ -1,0 +1,19 @@
+@import 'styles/colors';
+
+.button {
+  display: block;
+  min-width: 100px;
+  padding: 4px 35px;
+  font-size: 20px;
+  border-radius: 2px;
+  background-color: $blue700;
+  color: $white;
+
+  &:hover {
+    background-color: $blue800;
+  }
+
+  &:active {
+    background-color: $blue900;
+  }
+}
