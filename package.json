@@ -35,11 +35,13 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
+    "classnames": "^2.3.2",
     "eslint": "^8.35.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "prettier": "2.8.4"
+    "prettier": "2.8.4",
+    "sass": "^1.62.0"
   }
 }

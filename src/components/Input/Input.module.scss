@@ -1,0 +1,42 @@
+@import 'styles/colors';
+
+.inputWrapper {
+  height: 32px;
+  max-width: 273px;
+  width: 100%;
+
+  .label {
+    font-size: 20px;
+  }
+
+  .input {
+    border: 1px solid $gray400;
+    border-radius: 2px;
+    outline: none;
+    padding: 0 6px;
+
+    height: 100%;
+    width: 100%;
+
+    font-size: 16px;
+
+    &:hover {
+      border-color: $gray500;
+    }
+
+    &:focus {
+      outline: 1px solid $blue600;
+      border-color: $blue600;
+    }
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    &[type='number'] {
+      appearance: textfield;
+    }
+  }
+}

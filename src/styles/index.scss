@@ -1,0 +1,24 @@
+@import './colors';
+
+@font-face {
+  font-family: 'Abel';
+  src: url(./fonts/Abel-Regular.ttf);
+  font-weight: 400;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Abel', Times, serif;
+  box-sizing: border-box;
+  color: $gray500;
+}
+
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+li {
+  list-style-type: none;
+}
