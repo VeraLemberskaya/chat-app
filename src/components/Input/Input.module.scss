@@ -1,15 +1,15 @@
 @import 'styles/colors';
 
-.input {
+.inputWrapper {
   height: 32px;
   max-width: 273px;
   width: 100%;
 
-  &__label {
+  .label {
     font-size: 20px;
   }
 
-  &__input {
+  .input {
     border: 1px solid $gray400;
     border-radius: 2px;
     outline: none;
@@ -25,7 +25,8 @@
     }
 
     &:focus {
-      border-color: $blue300;
+      outline: 1px solid $blue600;
+      border-color: $blue600;
     }
 
     &::-webkit-outer-spin-button,

@@ -1,6 +1,6 @@
 import React, { ChangeEventHandler, FC } from 'react';
 
-import './Input.scss';
+import styles from './Input.module.scss';
 
 type InputType = 'text' | 'number' | 'password';
 
@@ -17,11 +17,11 @@ interface IInput {
 
 const Input: FC<IInput> = ({ label, name, type = 'text' }) => {
   return (
-    <div className="input">
-      <label className="input__label" htmlFor={name}>
+    <div className={styles.inputWrapper}>
+      <label className={styles.label} htmlFor={name}>
         {label}
       </label>
-      <input className="input__input" name={name} type={type} />
+      <input className={styles.input} name={name} type={type} />
     </div>
   );
 };

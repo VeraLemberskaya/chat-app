@@ -1,7 +1,7 @@
 import React, { FC, MouseEventHandler, ReactNode } from 'react';
 import classNames from 'classnames';
 
-import './Button.scss';
+import styles from './Button.module.scss';
 
 interface IButton {
   children: ReactNode;
@@ -11,7 +11,7 @@ interface IButton {
 
 const Button: FC<IButton> = ({ children, className, onClick }) => {
   return (
-    <button className={classNames(className, 'button')} onClick={onClick}>
+    <button className={classNames(className, styles.button)} onClick={onClick}>
       {children}
     </button>
   );
