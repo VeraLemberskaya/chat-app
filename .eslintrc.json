@@ -20,6 +20,12 @@
     "eol-last": ["warn", "always"],
     "prefer-const": "warn",
     "no-multiple-empty-lines": "warn",
+    "no-restricted-imports": [
+      "warn",
+      {
+        "patterns": ["components/*/**", "pages/*/**"]
+      }
+    ],
     "import/order": [
       "warn",
       {
