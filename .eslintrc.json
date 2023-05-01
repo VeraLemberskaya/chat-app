@@ -23,7 +23,7 @@
     "no-restricted-imports": [
       "warn",
       {
-        "patterns": ["components/*/**", "pages/*/**"]
+        "patterns": ["components/*/**", "layouts/*/**", "pages/*/**"]
       }
     ],
     "import/order": [

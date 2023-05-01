@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler, FC, useState } from 'react';
 import { EyeClosedIcon, EyeOpenIcon } from 'assets/icons';
+import classNames from 'classnames';
 
 import styles from './Input.module.scss';
 
@@ -12,11 +13,24 @@ interface IInput {
   value?: string | number;
   maxLength?: number;
   type?: InputType;
+  isError?: boolean;
+  error?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
 }
 
-const Input: FC<IInput> = ({ label, name, type = 'text' }) => {
+const Input: FC<IInput> = ({
+  label,
+  name,
+  error,
+  placeholder,
+  value,
+  maxLength,
+  type = 'text',
+  isError = false,
+  onChange,
+  onBlur,
+}) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   const togglePassword = () => {
@@ -37,13 +51,27 @@ const Input: FC<IInput> = ({ label, name, type = 'text' }) => {
     </div>
   );
 
+  const inputClassNames = classNames(styles.input, { [styles.error]: isError });
+
   return (
-    <div className={styles.inputWrapper}>
+    <div>
       <label className={styles.label} htmlFor={name}>
         {label}
       </label>
-      <input className={styles.input} name={name} type={getInputType()} />
-      {type === 'password' && passwordAdornment}
+      <div className={styles.inputWrapper}>
+        <input
+          className={inputClassNames}
+          maxLength={maxLength}
+          name={name}
+          placeholder={placeholder}
+          type={getInputType()}
+          value={value}
+          onBlur={onBlur}
+          onChange={onChange}
+        />
+        {type === 'password' && passwordAdornment}
+        {isError && <p className={styles.errorText}>{error}</p>}
+      </div>
     </div>
   );
 };

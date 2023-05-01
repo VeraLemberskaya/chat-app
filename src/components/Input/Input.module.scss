@@ -1,23 +1,31 @@
 @import 'styles/colors';
 
+.label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 20px;
+}
+
 .inputWrapper {
-  height: 32px;
   max-width: 273px;
   width: 100%;
   position: relative;
-
-  .label {
-    font-size: 20px;
-  }
+  height: 32px;
 
   .input {
     border: 1px solid $gray400;
+    background-color: $white;
     border-radius: 2px;
     outline: none;
     padding: 0 6px;
     height: 100%;
     width: 100%;
     font-size: 16px;
+
+    &.error {
+      background-color: $red100;
+      border-color: $red500;
+    }
 
     &:hover {
       border-color: $gray500;
@@ -26,6 +34,11 @@
     &:focus {
       outline: 1px solid $blue600;
       border-color: $blue600;
+
+      &.error {
+        outline: 1px solid $red500;
+        border-color: $red500;
+      }
     }
 
     &::-webkit-outer-spin-button,
@@ -50,5 +63,11 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+  }
+
+  .errorText {
+    color: $red500;
+    font-size: 14px;
+    position: absolute;
   }
 }

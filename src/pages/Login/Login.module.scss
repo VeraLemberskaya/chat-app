@@ -1,0 +1,25 @@
+@import 'styles/colors';
+
+.form {
+  width: 273px;
+
+  .fieldsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+  }
+
+  .buttonWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+  }
+}
+
+.link {
+  color: $gray400;
+
+  span {
+    font-weight: 600;
+  }
+}
