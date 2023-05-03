@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './Input.module.scss';
 
-type InputType = 'text' | 'number' | 'password';
+export type InputType = 'text' | 'number' | 'password';
 
 interface IInput {
   label?: string;

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import Input from 'components/Input';
 import { Link } from 'react-router-dom';
 import Button from 'components/Button';
 import AuthContainer from 'layouts/AuthContainer';
+import InputControl from 'components/InputControl';
 
 import { loginSchema } from './config/validationSchema';
 import styles from './Login.module.scss';
@@ -43,35 +43,8 @@ const Login = () => {
     <AuthContainer footer={footer}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.fieldsWrapper}>
-          <Controller
-            control={control}
-            name="login"
-            render={({ field: { onChange, onBlur, value }, fieldState: { invalid, error } }) => (
-              <Input
-                error={error?.message}
-                isError={invalid}
-                label="Login"
-                value={value}
-                onBlur={onBlur}
-                onChange={onChange}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, onBlur, value }, fieldState: { invalid, error } }) => (
-              <Input
-                error={error?.message}
-                isError={invalid}
-                label="Password"
-                type="password"
-                value={value}
-                onBlur={onBlur}
-                onChange={onChange}
-              />
-            )}
-          />
+          <InputControl control={control} label="Login" name="login" />
+          <InputControl control={control} label="Password" name="password" type="password" />
         </div>
         <div className={styles.buttonWrapper}>
           <Button>Login</Button>
