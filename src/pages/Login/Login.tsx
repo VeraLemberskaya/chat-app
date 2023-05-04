@@ -2,14 +2,16 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
-import Button from 'components/Button';
-import AuthContainer from 'layouts/AuthContainer';
-import InputControl from 'components/InputControl';
 
-import { loginSchema } from './config/validationSchema';
-import styles from './Login.module.scss';
+import AuthContainer from 'layouts/AuthContainer';
+
+import InputControl from 'components/InputControl';
+import Button from 'components/Button';
 
 import { routes } from 'constants/routes';
+
+import styles from './Login.module.scss';
+import { loginSchema } from './config/validationSchema';
 
 interface ILoginValues {
   login: string;

@@ -1,15 +1,18 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import AuthContainer from 'layouts/AuthContainer';
-import Button from 'components/Button';
 import { Link } from 'react-router-dom';
+
+import AuthContainer from 'layouts/AuthContainer';
+
+import Button from 'components/Button';
 import InputControl from 'components/InputControl';
+
+import { routes } from 'constants/routes';
 
 import { signUpSchema } from './config/validationSchema';
 import styles from './SignUp.module.scss';
 
-import { routes } from 'constants/routes';
 
 interface ISignUpValues {
   login: string;
