@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { LogoutIcon } from 'assets/icons';
 
 import styles from './Header.module.scss';

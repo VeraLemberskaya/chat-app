@@ -1,10 +1,11 @@
 import React, { ChangeEventHandler, FC, useState } from 'react';
-import { EyeClosedIcon, EyeOpenIcon } from 'assets/icons';
 import classNames from 'classnames';
+
+import { EyeClosedIcon, EyeOpenIcon } from 'assets/icons';
 
 import styles from './Input.module.scss';
 
-type InputType = 'text' | 'number' | 'password';
+export type InputType = 'text' | 'number' | 'password';
 
 interface IInput {
   label?: string;

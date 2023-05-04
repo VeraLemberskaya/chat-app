@@ -1,15 +1,18 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
-import AuthContainer from 'layouts/AuthContainer';
-import Input from 'components/Input';
-import Button from 'components/Button';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+
+import AuthContainer from 'layouts/AuthContainer';
+
+import Button from 'components/Button';
+import InputControl from 'components/InputControl';
+
+import { routes } from 'constants/routes';
 
 import { signUpSchema } from './config/validationSchema';
 import styles from './SignUp.module.scss';
 
-import { routes } from 'constants/routes';
 
 interface ISignUpValues {
   login: string;
@@ -45,49 +48,13 @@ const SignUp = () => {
     <AuthContainer footer={footer}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.fieldsWrapper}>
-          <Controller
+          <InputControl control={control} label="Login" name="login" />
+          <InputControl control={control} label="Password" name="password" type="password" />
+          <InputControl
             control={control}
-            name="login"
-            render={({ field: { onChange, onBlur, value }, fieldState: { invalid, error } }) => (
-              <Input
-                error={error?.message}
-                isError={invalid}
-                label="Login"
-                value={value}
-                onBlur={onBlur}
-                onChange={onChange}
-              />
-            )}
-          />
-          <Controller
-            control={control}
-            name="password"
-            render={({ field: { onChange, onBlur, value }, fieldState: { invalid, error } }) => (
-              <Input
-                error={error?.message}
-                isError={invalid}
-                label="Password"
-                type="password"
-                value={value}
-                onBlur={onBlur}
-                onChange={onChange}
-              />
-            )}
-          />
-          <Controller
-            control={control}
+            label="passwordRepeat"
             name="passwordRepeat"
-            render={({ field: { onChange, onBlur, value }, fieldState: { invalid, error } }) => (
-              <Input
-                error={error?.message}
-                isError={invalid}
-                label="passwordRepeat"
-                type="password"
-                value={value}
-                onBlur={onBlur}
-                onChange={onChange}
-              />
-            )}
+            type="password"
           />
         </div>
         <div className={styles.buttonWrapper}>

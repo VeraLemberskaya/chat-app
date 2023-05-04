@@ -30,6 +30,44 @@
       "warn",
       {
         "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "pages/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "layouts/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "components/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "constants/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "assets/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "styles/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "router/**",
+            "group": "internal",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["internal"],
         "groups": ["external", "internal", "parent", "sibling", "index", "object", "type"]
       }
     ],
