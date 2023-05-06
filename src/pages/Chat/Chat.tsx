@@ -5,10 +5,14 @@ import ChatInput from './components/ChatInput';
 import MessageList from './components/MessageList';
 
 const Chat = () => {
+  const handleSendMessage = (value: string) => {
+    console.log(value);
+  };
+
   return (
     <div className={styles.chatContainer}>
       <MessageList />
-      <ChatInput />
+      <ChatInput onSendMessage={handleSendMessage} />
     </div>
   );
 };
