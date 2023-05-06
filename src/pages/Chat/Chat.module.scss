@@ -1,0 +1,21 @@
+@import 'styles/media';
+
+.chatContainer {
+  flex-grow: 1;
+  width: 840px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  @media (max-width: $laptop) {
+    width: 700px;
+  }
+
+  @media (max-width: $tablet) {
+    width: 500px;
+  }
+
+  @media (max-width: $mobile) {
+    width: 100%;
+  }
+}

@@ -1,0 +1,102 @@
+@import 'styles/colors';
+@import 'styles/media';
+
+.messageWrapper {
+  display: flex;
+  width: fit-content;
+
+  .message {
+    position: relative;
+    padding: 4px 60px 15px 8px;
+    max-width: 263px;
+    color: inherit;
+  }
+
+  .sender {
+    color: inherit;
+  }
+
+  .date {
+    position: absolute;
+    font-size: 14px;
+    bottom: 4px;
+    right: 4px;
+  }
+
+  .anchor {
+    width: 9px;
+    height: 0;
+    border-top: 9px solid;
+  }
+
+  &.primary {
+    color: $white;
+
+    .message {
+      background-color: $blue700;
+    }
+
+    .anchor {
+      border-color: $blue700;
+    }
+
+    .date {
+      color: $white;
+    }
+  }
+
+  &.secondary {
+    color: $gray500;
+
+    .message {
+      background-color: $gray100;
+    }
+
+    .anchor {
+      border-color: $gray100;
+    }
+
+    .date {
+      color: $gray300;
+    }
+  }
+
+  &.anchorRight {
+    flex-direction: row-reverse;
+
+    .message {
+      border-radius: 6px 0 6px 6px;
+    }
+
+    .anchor {
+      border-right: 11px solid transparent;
+      border-radius: 0 2px 0 0;
+    }
+  }
+
+  &.anchorLeft {
+    flex-direction: row;
+
+    .message {
+      border-radius: 0 6px 6px 6px;
+    }
+
+    .anchor {
+      border-left: 11px solid transparent;
+      border-radius: 2px 0 0 0;
+    }
+  }
+
+  @media (max-width: $mobile) {
+    font-size: 14px;
+
+    .message {
+      padding: 4px 30px 18px 6px;
+    }
+
+    .date {
+      bottom: 2px;
+      font-size: 12px;
+    }
+  }
+}
