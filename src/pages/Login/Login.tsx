@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AuthContainer from 'layouts/AuthContainer';
 
@@ -31,8 +31,11 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = () => {
     console.log('submit');
+    navigate(routes.CHAT);
   };
 
   const footer = (

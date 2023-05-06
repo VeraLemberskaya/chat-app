@@ -1,7 +1,7 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import AuthContainer from 'layouts/AuthContainer';
 
@@ -12,7 +12,6 @@ import { routes } from 'constants/routes';
 
 import { signUpSchema } from './config/validationSchema';
 import styles from './SignUp.module.scss';
-
 
 interface ISignUpValues {
   login: string;
@@ -34,8 +33,11 @@ const SignUp = () => {
     resolver: yupResolver(signUpSchema),
   });
 
+  const navigate = useNavigate();
+
   const onSubmit = () => {
     console.log('submit');
+    navigate(routes.SIGN_IN);
   };
 
   const footer = (
