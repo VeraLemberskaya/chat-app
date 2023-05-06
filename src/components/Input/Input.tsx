@@ -16,6 +16,7 @@ interface IInput {
   type?: InputType;
   isError?: boolean;
   error?: string;
+  className?: string;
   onChange?: ChangeEventHandler<HTMLInputElement>;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
 }
@@ -27,6 +28,7 @@ const Input: FC<IInput> = ({
   placeholder,
   value,
   maxLength,
+  className,
   type = 'text',
   isError = false,
   onChange,
@@ -52,7 +54,7 @@ const Input: FC<IInput> = ({
     </div>
   );
 
-  const inputClassNames = classNames(styles.input, { [styles.error]: isError });
+  const inputClassNames = classNames(className, styles.input, { [styles.error]: isError });
 
   return (
     <div>

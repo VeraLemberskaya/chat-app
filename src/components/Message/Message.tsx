@@ -10,6 +10,8 @@ type TAnchorPosition = 'left' | 'right';
 interface IMessage {
   text: string;
   date: Date;
+  sender?: string;
+  className?: string;
   type?: TMessageType;
   anchorPosition?: TAnchorPosition;
 }
@@ -24,8 +26,16 @@ const ANCHOR_STYLES: { [key in TAnchorPosition]: string } = {
   right: styles.anchorRight,
 };
 
-const Message: FC<IMessage> = ({ text, date, type = 'primary', anchorPosition = 'right' }) => {
+const Message: FC<IMessage> = ({
+  text,
+  date,
+  sender,
+  className,
+  type = 'primary',
+  anchorPosition = 'right',
+}) => {
   const messageClassNames = classNames(
+    className,
     styles.messageWrapper,
     MESSAGE_STYLES[type],
     ANCHOR_STYLES[anchorPosition],
@@ -37,6 +47,7 @@ const Message: FC<IMessage> = ({ text, date, type = 'primary', anchorPosition = 
     <div className={messageClassNames}>
       <span className={styles.anchor} />
       <div className={styles.message}>
+        {sender && <div className={styles.sender}>{sender}</div>}
         {text}
         <div className={styles.date}>{formattedDate}</div>
       </div>

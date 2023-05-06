@@ -29,3 +29,14 @@ a {
   display: block;
   text-decoration: none;
 }
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: $gray100;
+}
+::-webkit-scrollbar-thumb {
+  background: $gray200;
+  border-radius: 5px;
+}

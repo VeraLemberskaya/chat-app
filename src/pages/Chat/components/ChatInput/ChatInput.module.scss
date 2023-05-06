@@ -1,0 +1,35 @@
+@import 'styles/colors';
+@import 'styles/media';
+
+.inputWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  height: 68px;
+  padding: 0 52px;
+  border-top: 1px solid $gray200;
+
+  .input {
+    display: block;
+    width: 100%;
+    border: none;
+    outline: none;
+    font-size: 16px;
+  }
+
+  .sendButton {
+    width: 20px;
+    height: 18px;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  @media (max-width: $mobile) {
+    height: 52px;
+    padding: 0 32px;
+  }
+}
