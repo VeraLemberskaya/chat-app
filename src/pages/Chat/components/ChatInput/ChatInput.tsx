@@ -1,14 +1,21 @@
-import React, { ChangeEventHandler, KeyboardEventHandler, useState } from 'react';
+import React, { ChangeEventHandler, FC, KeyboardEventHandler, useRef, useState } from 'react';
 
 import { SendIcon } from 'assets/icons';
 
+import Picker from '../Picker';
+
 import styles from './ChatInput.module.scss';
 
-const ChatInput = () => {
+interface IChatInput {
+  onSendMessage: (value: string) => void;
+}
+
+const ChatInput: FC<IChatInput> = ({ onSendMessage }) => {
   const [inputValue, setInputValue] = useState<string>('');
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const sendMessage = () => {
-    console.log(inputValue);
+    onSendMessage(inputValue);
     setInputValue('');
   };
 
@@ -22,8 +29,15 @@ const ChatInput = () => {
     }
   };
 
-  const handleClick = () => {
+  const handleSendClick = () => {
     sendMessage();
+    inputRef.current?.focus();
+  };
+
+  const handleEmojiClick = (emoji: string) => {
+    const newValue = `${inputValue}${emoji}`;
+    setInputValue(newValue);
+    inputRef.current?.focus();
   };
 
   return (
@@ -31,13 +45,17 @@ const ChatInput = () => {
       <input
         className={styles.input}
         placeholder="Start typing..."
+        ref={inputRef}
         value={inputValue}
         onChange={handleChange}
         onKeyUp={handleKeyUp}
       />
-      <button className={styles.sendButton} onClick={handleClick}>
-        <SendIcon />
-      </button>
+      <div className={styles.buttonsWrapper}>
+        <Picker onEmojiClick={handleEmojiClick} />
+        <button className={styles.sendButton} onClick={handleSendClick}>
+          <SendIcon />
+        </button>
+      </div>
     </div>
   );
 };

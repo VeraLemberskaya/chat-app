@@ -18,13 +18,15 @@
     font-size: 16px;
   }
 
-  .sendButton {
-    width: 20px;
-    height: 18px;
+  .buttonsWrapper {
+    display: flex;
+    gap: 16px;
 
-    svg {
-      width: 100%;
-      height: 100%;
+    .sendButton {
+      svg {
+        width: 20px;
+        height: 18px;
+      }
     }
   }
 
