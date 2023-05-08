@@ -1,0 +1,16 @@
+@import 'styles/colors';
+
+.menu {
+  position: fixed;
+  background-color: $white;
+  min-width: 16px;
+  min-height: 16px;
+  box-shadow: 0 2px 4px $gray500;
+  border-radius: 2px;
+  z-index: 100;
+
+  .menuList {
+    list-style: none;
+    padding: 8px 0;
+  }
+}

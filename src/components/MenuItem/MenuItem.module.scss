@@ -1,0 +1,26 @@
+@import 'styles/colors';
+
+.menuItem {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 6px 16px;
+
+  .icon {
+    height: 16px;
+    position: relative;
+    left: -8px;
+
+    svg {
+      height: 100%;
+    }
+  }
+
+  &:hover {
+    background-color: $gray100;
+  }
+
+  &:active {
+    background-color: $gray200;
+  }
+}
