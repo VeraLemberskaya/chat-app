@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 import classNames from 'classnames';
 import dayjs from 'dayjs';
 
@@ -14,6 +14,7 @@ interface IMessage {
   className?: string;
   type?: TMessageType;
   anchorPosition?: TAnchorPosition;
+  onContextMenu?: MouseEventHandler<HTMLDivElement>;
 }
 
 const MESSAGE_STYLES: { [key in TMessageType]: string } = {
@@ -33,6 +34,7 @@ const Message: FC<IMessage> = ({
   className,
   type = 'primary',
   anchorPosition = 'right',
+  onContextMenu,
 }) => {
   const messageClassNames = classNames(
     className,
@@ -44,7 +46,7 @@ const Message: FC<IMessage> = ({
   const formattedDate = dayjs(date).format('h:mm A');
 
   return (
-    <div className={messageClassNames}>
+    <div className={messageClassNames} onContextMenu={onContextMenu}>
       <span className={styles.anchor} />
       <div className={styles.message}>
         {sender && <div className={styles.sender}>{sender}</div>}

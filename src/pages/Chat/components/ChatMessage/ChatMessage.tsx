@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, MouseEventHandler } from 'react';
 
 import Message from 'components/Message';
 
@@ -8,9 +8,10 @@ import styles from './ChatMessage.module.scss';
 
 interface IChatMessage {
   message: IMessage;
+  onContextMenu: MouseEventHandler<HTMLDivElement>;
 }
 
-const ChatMessage: FC<IChatMessage> = ({ message }) => {
+const ChatMessage: FC<IChatMessage> = ({ message, onContextMenu }) => {
   const isCurrentUserMessage = message.userId === currentUserId;
 
   if (!isCurrentUserMessage)
@@ -24,7 +25,14 @@ const ChatMessage: FC<IChatMessage> = ({ message }) => {
       />
     );
 
-  return <Message className={styles.userMessage} date={message.date} text={message.text} />;
+  return (
+    <Message
+      className={styles.userMessage}
+      date={message.date}
+      text={message.text}
+      onContextMenu={onContextMenu}
+    />
+  );
 };
 
 export default ChatMessage;
