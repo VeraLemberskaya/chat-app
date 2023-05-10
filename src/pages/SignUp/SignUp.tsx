@@ -3,6 +3,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useAuthActions } from 'providers/auth';
+
 import AuthContainer from 'layouts/AuthContainer';
 
 import Button from 'components/Button';
@@ -14,18 +16,20 @@ import { signUpSchema } from './config/validationSchema';
 import styles from './SignUp.module.scss';
 
 interface ISignUpValues {
-  login: string;
+  userName: string;
   password: string;
-  passwordRepeat: string;
+  confirmPassword: string;
 }
 
 const defaultValues = {
-  login: '',
+  userName: '',
   password: '',
-  passwordRepeat: '',
+  confirmPassword: '',
 };
 
 const SignUp = () => {
+  const { signUp } = useAuthActions();
+
   const { control, handleSubmit } = useForm<ISignUpValues>({
     defaultValues,
     mode: 'onChange',
@@ -35,9 +39,14 @@ const SignUp = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = () => {
-    console.log('submit');
-    navigate(routes.SIGN_IN);
+  const onSubmit = async (values: ISignUpValues) => {
+    try {
+      await signUp(values);
+      navigate(routes.SIGN_IN);
+    } catch (err) {
+      //TODO: errors
+      console.log(err);
+    }
   };
 
   const footer = (
@@ -50,12 +59,12 @@ const SignUp = () => {
     <AuthContainer footer={footer}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.fieldsWrapper}>
-          <InputControl control={control} label="Login" name="login" />
+          <InputControl control={control} label="Login" name="userName" />
           <InputControl control={control} label="Password" name="password" type="password" />
           <InputControl
             control={control}
-            label="passwordRepeat"
-            name="passwordRepeat"
+            label="Confirm password"
+            name="confirmPassword"
             type="password"
           />
         </div>

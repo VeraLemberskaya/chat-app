@@ -2,13 +2,14 @@ import * as yup from 'yup';
 
 import { validationMessages } from 'constants/validationMessages';
 
+//TODO: password validation
 export const signUpSchema = yup.object({
-  login: yup.string().required(validationMessages.REQUIRED),
+  userName: yup.string().required(validationMessages.REQUIRED),
   password: yup
     .string()
     .required(validationMessages.REQUIRED)
     .min(8, validationMessages.MIN_LENGTH(8)),
-  passwordRepeat: yup
+  confirmPassword: yup
     .string()
     .required(validationMessages.REQUIRED)
     .min(8, validationMessages.MIN_LENGTH(8))

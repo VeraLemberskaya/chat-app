@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { useAuthActions } from 'providers/auth';
+
 import AuthContainer from 'layouts/AuthContainer';
 
 import InputControl from 'components/InputControl';
@@ -14,16 +16,18 @@ import styles from './Login.module.scss';
 import { loginSchema } from './config/validationSchema';
 
 interface ILoginValues {
-  login: string;
+  userName: string;
   password: string;
 }
 
 const defaultValues = {
-  login: '',
+  userName: '',
   password: '',
 };
 
 const Login = () => {
+  const { signIn } = useAuthActions();
+
   const { control, handleSubmit } = useForm<ILoginValues>({
     defaultValues,
     mode: 'onChange',
@@ -33,9 +37,14 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-  const onSubmit = () => {
-    console.log('submit');
-    navigate(routes.CHAT);
+  const onSubmit = async (values: ILoginValues) => {
+    try {
+      await signIn(values);
+      navigate(routes.CHAT);
+    } catch (err) {
+      //TODO: errors
+      console.log(err);
+    }
   };
 
   const footer = (
@@ -48,7 +57,7 @@ const Login = () => {
     <AuthContainer footer={footer}>
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.fieldsWrapper}>
-          <InputControl control={control} label="Login" name="login" />
+          <InputControl control={control} label="Login" name="userName" />
           <InputControl control={control} label="Password" name="password" type="password" />
         </div>
         <div className={styles.buttonWrapper}>
