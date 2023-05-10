@@ -23,7 +23,13 @@
     "no-restricted-imports": [
       "warn",
       {
-        "patterns": ["components/*/**", "layouts/*/**", "pages/*/**"]
+        "patterns": [
+          "providers/*/**",
+          "components/*/**",
+          "layouts/*/**",
+          "pages/*/**",
+          "hooks/*/**"
+        ]
       }
     ],
     "import/order": [
@@ -31,6 +37,11 @@
       {
         "newlines-between": "always",
         "pathGroups": [
+          {
+            "pattern": "providers/**",
+            "group": "internal",
+            "position": "after"
+          },
           {
             "pattern": "pages/**",
             "group": "internal",
@@ -48,6 +59,11 @@
           },
           {
             "pattern": "hooks/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "helpers/**",
             "group": "internal",
             "position": "after"
           },
