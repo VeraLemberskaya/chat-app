@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
-
-import { IMessage } from '../mocks/data';
+import { IMessage } from 'services/messages';
 
 interface IMessageGroup {
   date: string;

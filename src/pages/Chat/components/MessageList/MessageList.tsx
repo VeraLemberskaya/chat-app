@@ -1,4 +1,7 @@
 import React, { Fragment, MouseEventHandler, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
+
+import { useChat, useChatActions } from 'providers/chat';
 
 import Menu from 'components/Menu';
 import MenuItem from 'components/MenuItem';
@@ -8,12 +11,13 @@ import { useScrollToBottom } from 'hooks/useScrollToBottom';
 import { EditIcon, TrashIcon } from 'assets/icons';
 
 import ChatMessage from '../ChatMessage';
-import { messages } from '../../mocks/data';
 import { groupByDate } from '../../utils/groupByDate';
 
 import styles from './MessageList.module.scss';
 
 const MessageList = () => {
+  const { messages, hasMore } = useChat();
+  const { getMessages } = useChatActions();
   const ref = useScrollToBottom<HTMLDivElement>();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
   const isOpen = Boolean(anchorEl);
@@ -31,15 +35,25 @@ const MessageList = () => {
 
   return (
     <div className={styles.messageListWrapper}>
-      <div className={styles.messageList} ref={ref}>
-        {groupedMessages.map((group) => (
-          <Fragment key={group.date}>
-            <span className={styles.date}>{group.date}</span>
-            {group.messages.map((message) => (
-              <ChatMessage key={message.id} message={message} onContextMenu={handleContextMenu} />
-            ))}
-          </Fragment>
-        ))}
+      <div id="scrollable-messages" ref={ref}>
+        <InfiniteScroll
+          className={styles.messageList}
+          dataLength={messages.length}
+          hasMore={hasMore}
+          inverse={true}
+          loader={<p>Loading</p>}
+          next={getMessages}
+          scrollableTarget="scrollable-messages"
+        >
+          {groupedMessages.map((group) => (
+            <Fragment key={group.date}>
+              <span className={styles.date}>{group.date}</span>
+              {group.messages.map((message) => (
+                <ChatMessage key={message.id} message={message} onContextMenu={handleContextMenu} />
+              ))}
+            </Fragment>
+          ))}
+        </InfiniteScroll>
       </div>
       <Menu
         anchorEl={anchorEl}

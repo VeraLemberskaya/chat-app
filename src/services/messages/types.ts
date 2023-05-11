@@ -1,0 +1,18 @@
+export interface IGetMessagesParams {
+  skipAmount: number;
+  takeAmount: number;
+}
+
+export interface IMessage {
+  id: number;
+  text: string;
+  userId: string;
+  userName: string;
+  date: Date;
+}
+
+export interface IGetMessagesReponse {
+  skipAmount: number;
+  takeAmount: number;
+  messages: IMessage[];
+}

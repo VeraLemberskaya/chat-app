@@ -135,4 +135,4 @@ export const messages = [
   },
 ];
 
-export const currentUserId = 1;
+export const currentUserId = '1';

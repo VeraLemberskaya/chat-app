@@ -1,5 +1,7 @@
 import React from 'react';
 
+import ChatProvider from 'providers/chat';
+
 import styles from './Chat.module.scss';
 import ChatInput from './components/ChatInput';
 import MessageList from './components/MessageList';
@@ -10,10 +12,12 @@ const Chat = () => {
   };
 
   return (
-    <div className={styles.chatContainer}>
-      <MessageList />
-      <ChatInput onSendMessage={handleSendMessage} />
-    </div>
+    <ChatProvider>
+      <div className={styles.chatContainer}>
+        <MessageList />
+        <ChatInput onSendMessage={handleSendMessage} />
+      </div>
+    </ChatProvider>
   );
 };
 
