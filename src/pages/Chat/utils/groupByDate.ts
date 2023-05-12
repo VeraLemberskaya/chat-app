@@ -1,6 +1,5 @@
 import dayjs from 'dayjs';
-
-import { IMessage } from '../mocks/data';
+import { IMessage } from 'services/messages';
 
 interface IMessageGroup {
   date: string;
@@ -9,7 +8,7 @@ interface IMessageGroup {
 
 export const groupByDate = (messages: IMessage[]) => {
   return messages.reduce((acc: IMessageGroup[], curr) => {
-    const formattedDate = dayjs(curr.date).format('DD/MM/YYYY');
+    const formattedDate = dayjs(curr.createdAtUTC).format('DD/MM/YYYY');
     const group = acc.find(({ date }) => date === formattedDate);
 
     if (group) {

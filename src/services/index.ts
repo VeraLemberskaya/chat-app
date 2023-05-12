@@ -5,8 +5,10 @@ import { getToken, removeToken } from 'helpers/tokens';
 const AUTH_HEADER = 'Authorization';
 const UNAUTHORIZED_ERROR = 401;
 
+const BASE_URL = `${process.env.REACT_APP_BASE_URL}/api`;
+
 const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
+  baseURL: BASE_URL,
   responseType: 'json',
 });
 

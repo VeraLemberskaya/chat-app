@@ -1,8 +1,9 @@
 import React, { FC, MouseEventHandler } from 'react';
+import { IMessage } from 'services/messages';
+
+import { useAuth } from 'providers/auth';
 
 import Message from 'components/Message';
-
-import { IMessage, currentUserId } from '../../mocks/data';
 
 import styles from './ChatMessage.module.scss';
 
@@ -12,14 +13,15 @@ interface IChatMessage {
 }
 
 const ChatMessage: FC<IChatMessage> = ({ message, onContextMenu }) => {
-  const isCurrentUserMessage = message.userId === currentUserId;
+  const { user } = useAuth();
+  const isCurrentUserMessage = user ? message.userId === user.id.toString() : false;
 
   if (!isCurrentUserMessage)
     return (
       <Message
         anchorPosition="left"
-        date={message.date}
-        sender={message.username}
+        date={message.createdAtUTC}
+        sender={message.userName}
         text={message.text}
         type="secondary"
       />
@@ -28,7 +30,7 @@ const ChatMessage: FC<IChatMessage> = ({ message, onContextMenu }) => {
   return (
     <Message
       className={styles.userMessage}
-      date={message.date}
+      date={message.createdAtUTC}
       text={message.text}
       onContextMenu={onContextMenu}
     />
