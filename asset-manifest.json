@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/chat-app/static/css/main.9a610c82.css",
+    "main.js": "/chat-app/static/js/main.2b9e5d64.js",
+    "static/media/Abel-Regular.ttf": "/chat-app/static/media/Abel-Regular.035c8e80c8b1d36b34dd.ttf",
+    "static/media/trash.svg": "/chat-app/static/media/trash.d9d2f73471a4d298730fca5af83b7245.svg",
+    "static/media/smile.svg": "/chat-app/static/media/smile.25c0bbc63771497d378069e2d4a06e05.svg",
+    "static/media/send.svg": "/chat-app/static/media/send.b645ab4ab38bd80844ff78a1741bab2c.svg",
+    "index.html": "/chat-app/index.html",
+    "static/media/eye-closed.svg": "/chat-app/static/media/eye-closed.aa4b29c4eb459dfc63044719ade749cb.svg",
+    "static/media/eye-open.svg": "/chat-app/static/media/eye-open.cd9f6c1f9c9b80bd0c420b4e0c520ce2.svg",
+    "static/media/edit.svg": "/chat-app/static/media/edit.3fabb5b32019107bfa388f9b875dd110.svg",
+    "static/media/logout.svg": "/chat-app/static/media/logout.e2099a13a908b13608e69c710aab5954.svg",
+    "main.9a610c82.css.map": "/chat-app/static/css/main.9a610c82.css.map",
+    "main.2b9e5d64.js.map": "/chat-app/static/js/main.2b9e5d64.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a610c82.css",
+    "static/js/main.2b9e5d64.js"
+  ]
+}
