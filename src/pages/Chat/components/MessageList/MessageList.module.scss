@@ -6,18 +6,23 @@
   position: relative;
 }
 
-.messageList {
+.messagesContainer {
   position: absolute;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column-reverse;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.messageList {
   padding: 8px 6px 48px 6px;
-  overflow-y: auto;
-  display: flex;
   flex-direction: column;
+  display: flex;
   gap: 8px;
-  scroll-behavior: smooth;
 
   .date {
     align-self: center;

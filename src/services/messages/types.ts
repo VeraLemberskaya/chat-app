@@ -8,7 +8,7 @@ export interface IMessage {
   text: string;
   userId: string;
   userName: string;
-  date: Date;
+  createdAtUTC: string;
 }
 
 export interface IGetMessagesReponse {

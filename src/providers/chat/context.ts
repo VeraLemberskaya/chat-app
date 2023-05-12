@@ -1,6 +1,8 @@
 import { createContext, useContext } from 'react';
 import { IMessage } from 'services/messages';
 
+import { ISendMessage, IUpdateMessage } from './types';
+
 interface IChatContext {
   messages: IMessage[];
   hasMore: boolean;
@@ -8,6 +10,9 @@ interface IChatContext {
 
 interface IChatActionsContext {
   getMessages: () => void;
+  sendMessage: (data: ISendMessage) => void;
+  updateMessage: (data: IUpdateMessage) => void;
+  deleteMessage: (id: number) => void;
 }
 
 export const ChatContext = createContext<IChatContext>({
@@ -17,6 +22,9 @@ export const ChatContext = createContext<IChatContext>({
 
 export const ChatActionsContext = createContext<IChatActionsContext>({
   getMessages: () => undefined,
+  sendMessage: () => undefined,
+  updateMessage: () => undefined,
+  deleteMessage: () => undefined,
 });
 
 export const useChat = () => {

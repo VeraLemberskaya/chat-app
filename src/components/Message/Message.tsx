@@ -9,7 +9,7 @@ type TAnchorPosition = 'left' | 'right';
 
 interface IMessage {
   text: string;
-  date: Date;
+  date: string;
   sender?: string;
   className?: string;
   type?: TMessageType;

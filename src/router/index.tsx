@@ -1,6 +1,8 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
+import ChatProvider from 'providers/chat';
+
 import Login from 'pages/Login';
 import SignUp from 'pages/SignUp';
 import Chat from 'pages/Chat';
@@ -22,7 +24,14 @@ const Router = () => {
           <Route element={<SignUp />} path={routes.SIGN_UP} />
         </Route>
         <Route element={<ProtectedRoute />}>
-          <Route element={<Chat />} path={routes.CHAT} />
+          <Route
+            element={
+              <ChatProvider>
+                <Chat />
+              </ChatProvider>
+            }
+            path={routes.CHAT}
+          />
         </Route>
       </Route>
     </Routes>

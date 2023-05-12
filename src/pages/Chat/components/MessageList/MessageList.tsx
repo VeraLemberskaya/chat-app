@@ -1,32 +1,49 @@
-import React, { Fragment, MouseEventHandler, useState } from 'react';
+import React, { FC, Fragment, useState } from 'react';
+import { IMessage } from 'services/messages';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
 import { useChat, useChatActions } from 'providers/chat';
 
-import Menu from 'components/Menu';
-import MenuItem from 'components/MenuItem';
-
-import { useScrollToBottom } from 'hooks/useScrollToBottom';
-
-import { EditIcon, TrashIcon } from 'assets/icons';
-
 import ChatMessage from '../ChatMessage';
 import { groupByDate } from '../../utils/groupByDate';
+import MessageMenu from '../MessageMenu';
 
 import styles from './MessageList.module.scss';
 
-const MessageList = () => {
+interface IMessageList {
+  onMessageDelete: (messageId: number) => void;
+  onMessageEdit: (message: IMessage) => void;
+}
+
+const MessageList: FC<IMessageList> = ({ onMessageDelete, onMessageEdit }) => {
   const { messages, hasMore } = useChat();
   const { getMessages } = useChatActions();
-  const ref = useScrollToBottom<HTMLDivElement>();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
-  const isOpen = Boolean(anchorEl);
+  const [contextMessage, setContextMessage] = useState<IMessage | null>(null);
 
   const groupedMessages = groupByDate(messages);
 
-  const handleContextMenu: MouseEventHandler<HTMLDivElement> = (e) => {
+  const handleContextMenu = (
+    e: React.MouseEvent<HTMLDivElement, MouseEvent>,
+    message: IMessage,
+  ) => {
     e.preventDefault();
     setAnchorEl(e.currentTarget);
+    setContextMessage(message);
+  };
+
+  const handleMessageEdit = () => {
+    if (contextMessage) {
+      onMessageEdit(contextMessage);
+      handleClose();
+    }
+  };
+
+  const handleMessageDelete = () => {
+    if (contextMessage) {
+      onMessageDelete(contextMessage.id);
+      handleClose();
+    }
   };
 
   const handleClose = () => {
@@ -35,7 +52,7 @@ const MessageList = () => {
 
   return (
     <div className={styles.messageListWrapper}>
-      <div id="scrollable-messages" ref={ref}>
+      <div className={styles.messagesContainer} id="scrollable-messages">
         <InfiniteScroll
           className={styles.messageList}
           dataLength={messages.length}
@@ -49,25 +66,22 @@ const MessageList = () => {
             <Fragment key={group.date}>
               <span className={styles.date}>{group.date}</span>
               {group.messages.map((message) => (
-                <ChatMessage key={message.id} message={message} onContextMenu={handleContextMenu} />
+                <ChatMessage
+                  key={message.id}
+                  message={message}
+                  onContextMenu={(e) => handleContextMenu(e, message)}
+                />
               ))}
             </Fragment>
           ))}
         </InfiniteScroll>
       </div>
-      <Menu
+      <MessageMenu
         anchorEl={anchorEl}
-        anchorPosition={{ vertical: 'center', horizontal: 'center' }}
-        isOpen={isOpen}
         onClose={handleClose}
-      >
-        <MenuItem icon={<EditIcon />} onClick={handleClose}>
-          Edit
-        </MenuItem>
-        <MenuItem icon={<TrashIcon />} onClick={handleClose}>
-          Delete
-        </MenuItem>
-      </Menu>
+        onDelete={handleMessageDelete}
+        onEdit={handleMessageEdit}
+      />
     </div>
   );
 };
