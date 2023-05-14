@@ -1,6 +1,7 @@
 {
   "name": "chat-app",
   "version": "0.1.0",
+  "homepage": "https://VeraLemberskaya.github.io/chat-app",
   "private": true,
   "dependencies": {
     "@hookform/resolvers": "^3.1.0",
@@ -11,6 +12,7 @@
     "axios": "^1.4.0",
     "dayjs": "^1.11.7",
     "emoji-picker-react": "^4.4.9",
+    "gh-pages": "^5.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.9",
@@ -27,7 +29,9 @@
     "eject": "react-scripts eject",
     "eslint": "eslint --ext .js,.jsx,.ts,.tsx ./src/",
     "eslint --fix": "eslint --ext .js,.jsx,.ts,.tsx ./src/ --fix",
-    "prettier": "prettier --write "
+    "prettier": "prettier --write ",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "browserslist": {
     "production": [

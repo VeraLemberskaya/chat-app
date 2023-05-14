@@ -1,9 +1,11 @@
-import React, { FC, ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
-import { IGetMessagesParams, IMessage, messagesService } from 'services/messages';
+import React, { FC, ReactNode, useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import { IGetMessagesParams, messagesService } from 'services/messages';
 
 import { ChatActionsContext, ChatContext } from './context';
 import { ISendMessage, IUpdateMessage } from './types';
 import { useSignalRClient } from './hooks/useSignalRClient';
+import { reducer } from './model/reducer';
+import { addMessage, deleteMessage, setMessages, updateMessage } from './model/actions';
 
 interface IChatProvider {
   children: ReactNode;
@@ -20,7 +22,7 @@ const DELETE_MESSAGE_HANDLER_NAME = 'DeleteMessage';
 const UPDATE_MESSAGE_HANDLER_NAME = 'UpdateMessage';
 
 const ChatProvider: FC<IChatProvider> = ({ children }) => {
-  const [messages, setMessages] = useState<IMessage[]>([]);
+  const [messages, dispatch] = useReducer(reducer, []);
   const [hasMore, setHasMore] = useState<boolean>(true);
 
   const client = useSignalRClient();
@@ -29,7 +31,7 @@ const ChatProvider: FC<IChatProvider> = ({ children }) => {
     const { skipAmount, takeAmount } = params;
     const messageData = await messagesService.getMessages({ skipAmount, takeAmount });
 
-    setMessages((prevMessages) => [...messageData, ...prevMessages]);
+    dispatch(setMessages(messageData));
     setHasMore(!(messageData.length < takeAmount));
   }, []);
 
@@ -42,39 +44,40 @@ const ChatProvider: FC<IChatProvider> = ({ children }) => {
 
   useEffect(() => {
     client.on(RECEIVE_MESSAGE_HANDLER_NAME, (data) => {
-      setMessages((prevMessages) => [...prevMessages, data]);
+      dispatch(addMessage(data));
     });
 
     client.on(UPDATE_MESSAGE_HANDLER_NAME, (data) => {
-      setMessages((prevMessages) => {
-        const index = prevMessages.findIndex(({ id }) => id === data.id);
-        const newMessages = [...prevMessages];
-
-        newMessages[index] = data;
-        return newMessages;
-      });
+      dispatch(updateMessage(data));
     });
 
     client.on(DELETE_MESSAGE_HANDLER_NAME, (id) => {
-      setMessages((prevMessages) => prevMessages.filter((message) => message.id !== id));
+      dispatch(deleteMessage(id));
     });
   }, [client]);
 
-  const sendMessage = useCallback(
+  const handleSendMessage = useCallback(
     (data: ISendMessage) => {
       client.invoke(SEND_MESSAGE_METHOD_NAME, data);
     },
     [client],
   );
 
-  const updateMessage = useCallback(
+  const handleGetMessages = useCallback(() => {
+    getMessages({
+      skipAmount: messages.length,
+      takeAmount: TAKE_AMOUNT,
+    });
+  }, [getMessages, messages.length]);
+
+  const handleUpdateMessage = useCallback(
     (data: IUpdateMessage) => {
       client.invoke(UPDATE_MESSAGE_METHOD_NAME, data);
     },
     [client],
   );
 
-  const deleteMessage = useCallback(
+  const handleDeleteMessage = useCallback(
     (id: number) => {
       client.invoke(DELETE_MESSAGE_METHOD_NAME, id);
     },
@@ -91,16 +94,12 @@ const ChatProvider: FC<IChatProvider> = ({ children }) => {
 
   const actions = useMemo(
     () => ({
-      getMessages: () =>
-        getMessages({
-          skipAmount: messages.length,
-          takeAmount: TAKE_AMOUNT,
-        }),
-      sendMessage,
-      updateMessage,
-      deleteMessage,
+      getMessages: handleGetMessages,
+      sendMessage: handleSendMessage,
+      updateMessage: handleUpdateMessage,
+      deleteMessage: handleDeleteMessage,
     }),
-    [sendMessage, updateMessage, deleteMessage, getMessages, messages.length],
+    [handleSendMessage, handleUpdateMessage, handleDeleteMessage, handleGetMessages],
   );
 
   return (
